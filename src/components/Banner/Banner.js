@@ -11,11 +11,11 @@ const Banner = () => {
     };
 
     return (
-        <div className=''>
-            <Carousel activeIndex={index} onSelect={handleSelect}>
+        <div className='banner' >
+            <Carousel fade>
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="d-block w-100 img-size"
                         src={img1}
                         alt="First slide"
                     />
@@ -26,9 +26,9 @@ const Banner = () => {
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="d-block w-100 img-size"
                         src={img1}
-                        alt="Second slide"
+                         alt="Second slide"
                     />
 
                     <Carousel.Caption>
@@ -37,8 +37,8 @@ const Banner = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
-                    <img
-                        className="d-block w-100"
+                    <img 
+                        className="d-block w-100 img-size"
                         src={img1}
                         alt="Third slide"
                     />

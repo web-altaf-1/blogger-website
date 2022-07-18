@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import usePost from '../hooks/usePost';
 import SingleCard from '../SingleCard/SingleCard';
 import './Card.css';
 
 const Card = () => {
-    const [posts, setPosts] = useState([]);
-
-    useEffect(()=>{
-        fetch('data.json')
-        .then(res => res.json())
-        .then(data => setPosts(data))
-    },[])
+    const [posts, setPosts] = usePost();
     return (
-        <div className='all-posts'>
+        <div className='all-posts my-3'>
+            
             {
-                posts.map(post => <SingleCard key={post._id} post={post}></SingleCard>)
+                posts.slice(0, 3).map(post => <SingleCard key={post._id} post={post}></SingleCard>)
             }
         </div>
     );
