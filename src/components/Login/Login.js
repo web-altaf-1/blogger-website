@@ -17,8 +17,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="">
+        Diary
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -27,6 +27,7 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
+
 
 export default function SignIn() {
   const handleSubmit = (event) => {
@@ -37,6 +38,12 @@ export default function SignIn() {
       password: data.get('password'),
     });
   };
+
+  const [isTrue, setIsTrue] = React.useState(false);
+
+
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -78,8 +85,27 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={<Checkbox
+
+                onChange={e => {
+                  setIsTrue(e.target.checked);
+
+                  if(!isTrue){
+                    document.getElementById('password').setAttribute('type','text');
+                    
+                  }
+              
+                  else{
+                    document.getElementById('password').setAttribute('type','password');
+                  }
+                }}
+                value="checkedA"
+                inputProps={{
+                  'aria-label': 'primary checkbox',
+                }}
+              />}
+              label="Show Password"
+              // onClick={toogle}
             />
             <Button
               type="submit"
@@ -96,7 +122,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href='/register' variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

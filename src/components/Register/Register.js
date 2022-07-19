@@ -17,8 +17,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="">
+        Diary
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -29,6 +29,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const [isTrue, setIsTrue] = React.useState(false);
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -102,8 +106,27 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  control={<Checkbox
+
+                    onChange={e => {
+                      setIsTrue(e.target.checked);
+
+                      if (!isTrue) {
+                        document.getElementById('password').setAttribute('type', 'text');
+
+                      }
+
+                      else {
+                        document.getElementById('password').setAttribute('type', 'password');
+                      }
+                    }}
+                    value="checkedA"
+                    inputProps={{
+                      'aria-label': 'primary checkbox',
+                    }}
+                  />}
+                  label="Show Password"
+                // onClick={toogle}
                 />
               </Grid>
             </Grid>
@@ -117,7 +140,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
