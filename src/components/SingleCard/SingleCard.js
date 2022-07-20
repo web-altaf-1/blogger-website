@@ -6,12 +6,12 @@ const SingleCard = (props) => {
     const user ={
         name:'Altaf',
     };
-    const {name, content,img} = props.post;
+    const {title, content,img} = props.post;
     return (
         <Card className='single-card' style={{ width: '18rem' }}>
             <Card.Img variant="top" src={img} />
             <Card.Body>
-                <Card.Title>{name}</Card.Title>
+                <Card.Title>{title? title : 'No Title'}</Card.Title>
                 <Card.Text>
                     { content.length < 100 ? content : content.slice(0, 100)+'...'}
                 </Card.Text>
