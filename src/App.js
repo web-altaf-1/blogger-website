@@ -5,6 +5,8 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Navbar from './components/Navbar/Navbar';
 import NewPost from './components/NewPost/NewPost';
+import Footer from './components/Footer/Footer';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path='/register' element={<Register></Register>}></Route>
 
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }

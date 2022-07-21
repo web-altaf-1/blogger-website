@@ -12,6 +12,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import auth from '../../firebase.init';
+import Loading from '../Loading/Loading';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Copyright(props) {
   return (
@@ -29,25 +36,53 @@ function Copyright(props) {
 const theme = createTheme();
 
 
+
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const navigate = useNavigate();
 
-    
-
-
-  };
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+  const [loading2] = useSignInWithGoogle(auth);
 
   const [isTrue, setIsTrue] = React.useState(false);
 
 
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+
+    signInWithEmailAndPassword(email, password);
+
+    toast('User created successfull')
+
+  };
+
+
+
+
+
+  if (user) {
+    navigate('/');
+
+  }
+
+
+  if (loading) {
+    return <Loading></Loading>
+  }
+
+  if (error) {
+    toast(error.message);  
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -94,13 +129,13 @@ export default function SignIn() {
                 onChange={e => {
                   setIsTrue(e.target.checked);
 
-                  if(!isTrue){
-                    document.getElementById('password').setAttribute('type','text');
-                    
+                  if (!isTrue) {
+                    document.getElementById('password').setAttribute('type', 'text');
+
                   }
-              
-                  else{
-                    document.getElementById('password').setAttribute('type','password');
+
+                  else {
+                    document.getElementById('password').setAttribute('type', 'password');
                   }
                 }}
                 value="checkedA"
@@ -109,7 +144,7 @@ export default function SignIn() {
                 }}
               />}
               label="Show Password"
-              // onClick={toogle}
+            // onClick={toogle}
             />
             <Button
               type="submit"
@@ -133,8 +168,10 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
+        <SocialLogin></SocialLogin>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

@@ -14,6 +14,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../Loading/Loading';
 
 function Copyright(props) {
   return (
@@ -32,6 +36,7 @@ const theme = createTheme();
 
 export default function SignUp() {
   const [isTrue, setIsTrue] = React.useState(false);
+  const navigate = useNavigate();
   const [
     createUserWithEmailAndPassword,
     user,
@@ -40,7 +45,7 @@ export default function SignUp() {
   ] = useCreateUserWithEmailAndPassword(auth);
 
 
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
@@ -48,12 +53,20 @@ export default function SignUp() {
 
 
     createUserWithEmailAndPassword(email,password);
-    window.alert('Created user ')
-
-
+    toast('User created successfully')
 
   };
 
+  if(user){
+    navigate('/')
+  }
+  if(loading){
+    return <Loading></Loading>
+  }
+
+  if(error){
+    toast(error.message)
+  }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -161,6 +174,7 @@ export default function SignUp() {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
+      <ToastContainer></ToastContainer>
     </ThemeProvider>
   );
 }

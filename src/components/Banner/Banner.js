@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Banner.css';
 import Carousel from 'react-bootstrap/Carousel';
 import img1 from '../../images/slide_bg.png'
+import Loading from '../Loading/Loading';
 
 const Banner = () => {
     const [index, setIndex] = useState(0);
@@ -9,6 +10,8 @@ const Banner = () => {
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
     };
+
+    
 
     return (
         <div className='banner' >

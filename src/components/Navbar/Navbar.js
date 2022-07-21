@@ -6,11 +6,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+import NavMenu from '../NavMenu/NavMenu';
 
 function CollapsibleExample() {
   const [user, loading, error] = useAuthState(auth);
   console.log(user);
-  const handleSignOut =()=>{
+  const handleSignOut = () => {
     signOut(auth);
   }
   return (
@@ -24,12 +25,15 @@ function CollapsibleExample() {
             {
               user ? <Nav.Link as={Link} to="/new-post">Create a Post</Nav.Link> : <></>
             }
-            
+
           </Nav>
           <Nav>
             {
-              !user? <Nav.Link as={Link} to="/login">Login</Nav.Link> : <Nav.Link onClick={handleSignOut}  >Logout</Nav.Link>
+              !user ? <Nav.Link as={Link} to="/login">Login</Nav.Link> : <Nav.Link active onClick={handleSignOut}  >Logout</Nav.Link>
             }
+          </Nav>
+          <Nav>
+            {user? <NavMenu></NavMenu> : <></>}
           </Nav>
         </Navbar.Collapse>
       </Container>
