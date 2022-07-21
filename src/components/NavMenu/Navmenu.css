@@ -1,33 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-
-#app {
-    border: 3px solid #e3e3e3;
-    border-radius: 4px;
-    padding: 20px;
-
-
-
+.action {
+    font-family: 'poppins', sans-serif;
+    position: fixed;
+    top: 20px;
+    right: 30px;
 
 }
 
-#circle-avatar {
-    display: grid;
-    width: 100px;
-    height: 100px;
+.action .profile {
     border-radius: 50%;
-    background-color: #ffbd30;
-    place-items: center;
+    cursor: pointer;
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+    width: 60px;
 
 }
 
-.card2 {
-    width: 250px;
-    height: 300px;
-    overflow: auto;
+.action .profile img {
+    width: 100%;
+    top: 0;
+    position: absolute;
+    object-fit: cover;
+    left: 0;
+    height: 100%;
+
 }
 
+.action .menu {
+    background-color: white;
+    box-shadow: 5px 5px 32px gray;
+    border-radius: 15%;
+    padding: 10px 20px;
+    position: absolute;
+    right: -20px;
+    width: 200px;
+    transition: 0.5s;
 
-.popup-menu-options{
-    left: auto;
-    right: 0 !important;
+
 }
+
+.action .menu::before {
+    background-color: white;
+    content: '';
+    height: 20px;
+    position: absolute;
+    right: 30px;
+    transform: rotate(45deg);
+    top: -5px;
+    width: 20px;
+}
+
+.action .menu h3 {
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5em;
+    padding: 20px 0px;
+    text-align: left;
+    width: 100%;
+}
+
+.action .menu h3 div {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.action .menu ul li {
+    text-align: center;
+    border-top: 1px solid gray;
+    display: flex;
+    justify-content: left;
+    list-style-type: none;
+    padding: 10px 0px;
+}
+
+.action .menu ul li img {
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: 0.5s;
+
+}
+
+.action .menu ul li a {
+    display: inline-block;
+    font-size: 14px;
+    padding-left: 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+
+}
+
+.action .menu ul li:hover img{
+    opacity: 1;
+}
+.action .menu ul li:hover a{
+    color: magenta;
+}
+

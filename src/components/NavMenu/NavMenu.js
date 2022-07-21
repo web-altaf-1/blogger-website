@@ -1,68 +1,104 @@
-import React from 'react';
+import { Logout, PersonAdd, Settings } from '@mui/icons-material';
+import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import { signOut } from 'firebase/auth';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { PopupMenu } from 'react-simple-widgets';
 import auth from '../../firebase.init';
-import './Navmenu.css';
+
 const NavMenu = () => {
+    
+
+    const [anchorEl, setAnchorEl] = useState(null);
     const [user] = useAuthState(auth);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     return (
-        <div id="">
-            <div className="text-end">
-                <PopupMenu >
-                    <img className='ms-4' style={{ width: '33px', height: '33px', borderRadius: '50%', }} src={user ? user.photoURL : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="" />
-
-                    <div className="card2 card text-start">
-                        <div className="card-body px-4 py-4">
-                            <div id="circle-avatar" className="text-center mx-auto mb-4">
-                                <h5>K</h5>
-                            </div>
-
-                            <h5 className="text-center mb-0">John Doe</h5>
-                            <p className="text-center mb-2">jd@gmail.com</p>
-
-                            <hr />
-
-                            <p
-                                className="mb-0"
-                                style={{ color: "#bebebe", fontWeight: "bold", fontSize: 12 }}
-                            >
-                                ROLES
-                            </p>
-                            <p style={{ fontSize: 12 }}>
-                                {["Submitter", "Project manager", "Change control board"].join(
-                                    ", "
-                                )}
-                            </p>
-
-                            <hr className="mb-0" style={{ margin: "0 -24px 0" }} />
-
-                            <div
-                                className="list-group list-group-flush"
-                                style={{ margin: "0 -24px 0" }}
-                            >
-                                <button className="list-group-item list-group-item-action px-4">
-                                    <small>Change Requests</small>
-                                </button>
-                                <button className="list-group-item list-group-item-action px-4">
-                                    <small>Pending Requests</small>
-                                </button>
-                                <button className="list-group-item list-group-item-action px-4">
-                                    <small>Other Requests</small>
-                                </button>
-                            </div>
-
-                            <hr style={{ margin: "0 -24px 24px" }} />
-
-                            <div className="d-grid">
-                                <button className="btn btn-secondary">
-                                    <small>Logout</small>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </PopupMenu>
-            </div>
-        </div>
+        <React.Fragment>
+            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                <Typography sx={{ minWidth: 100 }}>Contact</Typography>
+                <Typography sx={{ minWidth: 100 }}>Profile</Typography>
+                <Tooltip title="Account settings">
+                    <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open ? 'account-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                    >
+                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                    </IconButton>
+                </Tooltip>
+            </Box>
+            <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                    elevation: 0,
+                    sx: {
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        '& .MuiAvatar-root': {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                        },
+                        '&:before': {
+                            content: '""',
+                            display: 'block',
+                            position: 'absolute',
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: 'background.paper',
+                            transform: 'translateY(-50%) rotate(45deg)',
+                            zIndex: 0,
+                        },
+                    },
+                }}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            >
+                <MenuItem>
+                    <Avatar /> Profile
+                </MenuItem>
+                <MenuItem>
+                    <Avatar /> My account
+                </MenuItem>
+                <Divider />
+                <MenuItem>
+                    <ListItemIcon>
+                        <PersonAdd fontSize="small" />
+                    </ListItemIcon>
+                    Add another account
+                </MenuItem>
+                <MenuItem>
+                    <ListItemIcon>
+                        <Settings fontSize="small" />
+                    </ListItemIcon>
+                    Settings
+                </MenuItem>
+                <MenuItem onClick={()=> signOut(auth)}>
+                    <ListItemIcon>
+                        <Logout fontSize="small" />
+                    </ListItemIcon>
+                    Logout
+                </MenuItem>
+            </Menu>
+        </React.Fragment>
     );
 };
 

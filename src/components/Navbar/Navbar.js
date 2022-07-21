@@ -11,11 +11,9 @@ import NavMenu from '../NavMenu/NavMenu';
 function CollapsibleExample() {
   const [user, loading, error] = useAuthState(auth);
   console.log(user);
-  const handleSignOut = () => {
-    signOut(auth);
-  }
+  
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar sticky='top' collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand as={Link} to="/">Diary</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -29,7 +27,7 @@ function CollapsibleExample() {
           </Nav>
           <Nav>
             {
-              !user ? <Nav.Link as={Link} to="/login">Login</Nav.Link> : <Nav.Link active onClick={handleSignOut}  >Logout</Nav.Link>
+              !user ? <Nav.Link as={Link} to="/login">Login</Nav.Link> : <></>
             }
           </Nav>
           <Nav>
