@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 import './SingleCard.css';
 
 const SingleCard = (props) => {
-    const user ={
-        name:'Altaf',
-    };
-    const {title, content,img} = props.post;
+    const [user] = useAuthState(auth);
+    // console.log(props.post)
+    const {title, content,img ,name} = props.post;
     return (
         <Card className='single-card' style={{ width: '18rem' }}>
             <Card.Img variant="top" src={img} />
@@ -19,7 +20,7 @@ const SingleCard = (props) => {
             </Card.Body>
             <div>
                 <img className='ms-2 my-2' style={{width:'33px',height:'33px'}} src='https://img.freepik.com/premium-vector/man-profile-cartoon_18591-58482.jpg?w=2000' alt="" />
-                <span className='fw-bold ms-2'>{user? user.name : 'User'}</span>  <small>3 Month ago</small>
+                <span className='fw-bold ms-2'>{name}</span>  <small>3 Month ago</small>
             </div>
         </Card>
     );

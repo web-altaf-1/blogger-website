@@ -23,6 +23,9 @@ function CollapsibleExample() {
             {
               user ? <Nav.Link as={Link} to="/new-post">Create a Post</Nav.Link> : <></>
             }
+            {
+              user?.email == 'web.altaf.1@gmail.com' ? <Nav.Link as={Link} to="/admin-panel">Admin Panel</Nav.Link> : <></> 
+            }
 
           </Nav>
           <Nav>

@@ -62,7 +62,7 @@ export default function SignIn() {
 
     signInWithEmailAndPassword(email, password);
 
-    toast('User created successfull')
+    toast('User Login successfull')
 
   };
 

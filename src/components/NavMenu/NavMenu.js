@@ -8,16 +8,35 @@ import auth from '../../firebase.init';
 
 const NavMenu = () => {
     
-
-    const [anchorEl, setAnchorEl] = useState(null);
     const [user] = useAuthState(auth);
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    
     const open = Boolean(anchorEl);
+    
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const handleSignOut =()=>{
+        console.log('clicked');
+        signOut(auth);
+    }
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const showAvatar =() =>{
+        if(user?.photoURL == null){
+            return 'https://i.ibb.co/x258KZb/profile.jpg'
+        }
+        if(user?.photoURL !== null){
+            return user.photoURL;
+        }
+    }
+    
+    
 
     return (
         <React.Fragment>
@@ -33,7 +52,10 @@ const NavMenu = () => {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                        <Avatar sx={{ width: 32, height: 32 }}> {
+                            <img className='img-fluid' src={showAvatar()} alt="" />
+                            
+                        } </Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -91,7 +113,7 @@ const NavMenu = () => {
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem onClick={()=> signOut(auth)}>
+                <MenuItem onClick={handleSignOut}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
