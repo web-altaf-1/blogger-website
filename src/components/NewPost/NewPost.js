@@ -29,7 +29,7 @@ const NewPost = () => {
 
 
 
-        const url = `http://localhost:5000/newpost`;
+        const url = `https://sheltered-temple-11409.herokuapp.com/newpost`;
         fetch(url, {
             method: 'POST',
             headers: {

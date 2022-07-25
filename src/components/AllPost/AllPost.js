@@ -25,7 +25,7 @@ const AllPost = () => {
                         posts.map(post => <HomeSingleCard key={post._id} post={post}></HomeSingleCard>)
                     }
                 </div>
-                <div className='w-25 right-sidebar'>
+                <div className='w-25 right-sidebar my-4'>
                     <div className="" style={{ position: 'sticky', top: "0" }}>
                         <div className="card">
                             <h2>About Me</h2>
