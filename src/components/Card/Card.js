@@ -16,7 +16,7 @@ const Card = () => {
         <div className='all-posts my-3'>
             
             {
-                posts.slice(0,100).map(post => <SingleCard key={post._id} post={post}></SingleCard>)
+                posts.slice(0,3).map(post => <SingleCard key={post._id} post={post}></SingleCard>)
             }
         </div>
     );

@@ -4,6 +4,7 @@ const AdminPanel = () => {
     return (
         <div style={{minHeight:'100vh'}}>
             <h2>This is admin panel</h2>
+            
         </div>
     );
 };

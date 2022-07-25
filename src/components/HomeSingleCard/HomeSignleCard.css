@@ -18,7 +18,7 @@ body {
 .projcard-container {
     margin-left: auto;
     margin-right: auto;
-    width: 1000px;
+    width: auto;
 }
 
 .projcard {
@@ -263,7 +263,7 @@ body {
     font-size: 14px;
     cursor: default;
     user-select: none;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .projcard-tag {
@@ -300,4 +300,31 @@ body {
     border-top: 13px solid transparent;
     right: -10px;
     top: 0;
+}
+
+
+.single-card-post{
+    display: none;
+}
+
+
+/* make services responsive */
+@media only screen and (max-width:576px) {
+    .single-card-post{
+        display: block;
+        margin: 10px auto;
+
+    }
+    .projcard-container{
+        display: none;
+    }
+
+    
+
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+    .single-card-post{
+        display: none;
+    }
 }

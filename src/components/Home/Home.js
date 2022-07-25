@@ -1,8 +1,9 @@
 import React from 'react';
 import AllPost from '../AllPost/AllPost';
 import Banner from '../Banner/Banner';
+import BlogsPost from '../BlogsPost/BlogsPost';
 import Card from '../Card/Card';
-import RecentlyPost from '../RecentlyPost/RecentlyPost';
+// import RecentlyPost from '../RecentlyPost/RecentlyPost';
 
 const Home = () => {
     return (
@@ -13,7 +14,8 @@ const Home = () => {
             </div>
             <Card></Card>
             <AllPost></AllPost>
-            <RecentlyPost></RecentlyPost>
+
+            {/* <RecentlyPost></RecentlyPost> */}
             
         </div>
     );

@@ -10,6 +10,7 @@ import AdminPanel from './components/AdminPanel/AdminPanel';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RequireAdmin from './components/RequireAdmin/RequireAdmin';
+import PostDetails from './components/PostDetails/PostDetails';
 
 function App() {
   return (
@@ -18,12 +19,19 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/post/:id' element={<PostDetails></PostDetails>}></Route>
         <Route path='/new-post' element={<NewPost></NewPost>}></Route>
         <Route path='/admin-panel' element={
           <RequireAdmin>
             <AdminPanel></AdminPanel>
           </RequireAdmin>
         }></Route>
+        {/* <Route path='/admin-dashboard' element={
+          <RequireAdmin>
+            <Dashboard>
+          </RequireAdmin>
+        }></Route> */}
+        
         <Route path='/register' element={<Register></Register>}></Route>
 
       </Routes>
