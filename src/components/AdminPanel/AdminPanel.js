@@ -17,7 +17,8 @@ const AdminPanel = () => {
                         <th>Gmail</th>
                         <th>User Photo</th>
                         <th>Post Title</th>
-                        <th>Action</th>
+                        <th>Time</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
 
@@ -26,7 +27,9 @@ const AdminPanel = () => {
                         <tr key={post._id}>
                             <td title={post._id}>{post._id?.slice(0,6)}</td>
                             <td>
-                                <img src={post.img} height="50px" alt="" />
+                                {
+                                    post.img ? <img src={post.img} width='50px' height="50px" alt="" /> : "No Image"
+                                }
                             </td>
                             <td>{post.name}</td>
                             <td>{post.email}</td>

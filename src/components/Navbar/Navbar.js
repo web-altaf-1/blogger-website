@@ -11,7 +11,6 @@ import NavMenu from '../NavMenu/NavMenu';
 
 function CollapsibleExample() {
   const [user, loading, error] = useAuthState(auth);
-  console.log(user);
 
   const notUser =()=>{
     toast.error('User must be login to create a post')

@@ -19,7 +19,6 @@ const NavMenu = () => {
     };
 
     const handleSignOut =()=>{
-        console.log('clicked');
         signOut(auth);
     }
 

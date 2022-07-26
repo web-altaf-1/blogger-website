@@ -18,7 +18,6 @@ const AllPost = () => {
     const [pageCount, setPageCount] = useState(0);
     const [page, setPage] = useState(1);
 
-    console.log(page)
     useEffect(() => {
         fetch('http://localhost:5000/post-count')
             .then(res => res.json())
@@ -31,13 +30,15 @@ const AllPost = () => {
 
     }, []);
 
+    var size = 8;
+
     useEffect(() => {
         setIsLoading(true)
-        fetch(`http://localhost:5000/posts?page=${page}&size=${8}`)
+        fetch(`http://localhost:5000/posts?page=${page}&size=${size}`)
             .then(res => res.json())
             .then(data => setAllPost(data))
         setIsLoading(false)
-    }, [page])
+    }, [page,size])
 
 
     if (isLoading) {

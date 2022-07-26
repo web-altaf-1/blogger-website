@@ -6,7 +6,6 @@ import './SingleCard.css';
 
 const SingleCard = (props) => {
     const [user] = useAuthState(auth);
-    // console.log(props.post)
     const {title, content,img ,name} = props.post;
     return (
         <Card className='single-card' style={{ width: '18rem' }}>
