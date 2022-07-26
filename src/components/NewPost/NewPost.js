@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import './NewPost.css';
 
@@ -27,7 +28,8 @@ const NewPost = () => {
         const newData = { email: user?.email, photo: user?.photoURL, name: user?.displayName ? user?.displayName : 'Anonymous', title: title, img:img, content: content, time: time }
         console.log(newData);
 
-
+        event.target.reset();
+        toast('Post Created Successfully')
 
         const url = `https://sheltered-temple-11409.herokuapp.com/newpost`;
         fetch(url, {
@@ -53,14 +55,14 @@ const NewPost = () => {
 
 
                     <Form.Group>
-                        <Form.Control name='photo' className='mb-2 rounded' type="text" placeholder="Enter a Photo URL" />
+                        <Form.Control required name='photo' className='mb-2 rounded' type="text" placeholder="Enter a Photo URL" />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Control name='title' className='mb-2 rounded' type="text" placeholder="Enter Post Title" />
+                        <Form.Control required name='title' className='mb-2 rounded' type="text" placeholder="Enter Post Title" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
 
-                        <textarea className='p-2' name='post' style={{ height: '50vh', width: '100%' }} type="text" placeholder="Create a New Post" />
+                        <textarea required className='p-2' name='post' style={{ height: '50vh', width: '100%' }} type="text" placeholder="Create a New Post" />
 
                     </Form.Group>
 

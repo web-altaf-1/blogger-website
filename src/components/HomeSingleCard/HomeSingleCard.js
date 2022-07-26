@@ -22,7 +22,7 @@ const HomeSingleCard = (props) => {
                     <Card.Text>
                         {content.length < 100 ? content : content.slice(0, 100) + '...'}
                     </Card.Text>
-                    <Button variant="primary">Read More...</Button>
+                    <Button onClick={() => openSingleItem(_id)} variant="primary">Read More...</Button>
                 </Card.Body>
                 <div>
                     <img className='ms-2 my-2' style={{ width: '33px', height: '33px' }} src='https://img.freepik.com/premium-vector/man-profile-cartoon_18591-58482.jpg?w=2000' alt="" />

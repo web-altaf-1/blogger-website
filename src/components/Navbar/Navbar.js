@@ -5,12 +5,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import NavMenu from '../NavMenu/NavMenu';
 
 function CollapsibleExample() {
   const [user, loading, error] = useAuthState(auth);
   console.log(user);
+
+  const notUser =()=>{
+    toast.error('User must be login to create a post')
+  }
   
   return (
     <Navbar sticky='top' collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -19,9 +24,10 @@ function CollapsibleExample() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="#features">Features</Nav.Link>
+            
             {
-              user ? <Nav.Link as={Link} to="/new-post">Create a Post</Nav.Link> : <></>
+              user ? <Nav.Link as={Link} to="/new-post">Create a Post</Nav.Link> : <Nav.Link onClick={notUser} as={Link} to="/new-post">Create a Post </Nav.Link>
+              
             }
             {
               user?.email == 'web.altaf.1@gmail.com' ? <Nav.Link as={Link} to="/admin-panel">Admin Panel</Nav.Link> : <></> 
