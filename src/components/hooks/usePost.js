@@ -12,9 +12,13 @@ const usePost = () => {
 
     useEffect(()=>{
         setIsLoading(true);
-        fetch('http://localhost:5000/posts')
+        fetch('https://sheltered-temple-11409.herokuapp.com/posts')
         .then(res => res.json())
-        .then(data => setPosts(data))
+        
+        .then(data => {
+            
+            setPosts(data);
+        })
 
         
         setIsLoading(false);

@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -43,16 +43,21 @@ export default function SignUp() {
     loading,
     error,
   ] = useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
 
   
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
+    const firstName = event.target.firstName.value;
+    const lastName = event.target.lastName.value;
     const email = event.target.email.value;
+    const name = firstName +' '+ lastName; 
     const password = event.target.password.value;
 
 
-    createUserWithEmailAndPassword(email,password);
+    await createUserWithEmailAndPassword(email,password);
+    await updateProfile({ displayName: name });
     toast('User created successfully')
 
   };

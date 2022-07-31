@@ -11,14 +11,33 @@ import 'react-toastify/dist/ReactToastify.css';
 import RequireAdmin from './components/RequireAdmin/RequireAdmin';
 import PostDetails from './components/PostDetails/PostDetails';
 import RequireAuth from './components/RequireAuth/RequireAuth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './firebase.init';
+import PreLoader from './components/PreLoader/PreLoader';
+import UserProfile from './components/UserProfile/UserProfile';
+
+
+import ChatBot from 'react-simple-chatbot';
+import { ThemeProvider } from 'styled-components';
 
 function App() {
+  const [user, loading] = useAuthState(auth);
+
+
+  if (loading) {
+    return <PreLoader ></PreLoader>
+  }
   return (
     <div className="">
       <Navbar></Navbar>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/user-profile' element={
+          <RequireAuth>
+            <UserProfile></UserProfile>
+          </RequireAuth>
+        }></Route>
         <Route path='/post/:id' element={<PostDetails></PostDetails>}></Route>
         <Route path='/new-post' element={
           <RequireAuth>
@@ -40,6 +59,9 @@ function App() {
 
       </Routes>
       <ToastContainer></ToastContainer>
+      <div>
+
+      </div>
       {/* <Footer></Footer> */}
     </div>
   );

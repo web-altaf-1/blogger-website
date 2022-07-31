@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const NavMenu = () => {
@@ -11,7 +12,7 @@ const NavMenu = () => {
     const [user] = useAuthState(auth);
     const [anchorEl, setAnchorEl] = useState(null);
 
-    
+    const navigate = useNavigate();
     const open = Boolean(anchorEl);
     
     const handleClick = (event) => {
@@ -94,7 +95,11 @@ const NavMenu = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>
+                <img style={{width:'56px',height:'56px',borderRadius:'50%',margin:'auto',display:'flex'}} src={user.photoURL? user.photoURL : 'https://i.ibb.co/x258KZb/profile.jpg'} alt="user" />
+                <h4 className='text-center'>
+                     {user.displayName ? user.displayName : 'Unknown'}
+                </h4>
+                <MenuItem onClick={()=> navigate('/user-profile')}>
                     <Avatar /> Profile
                 </MenuItem>
                 <MenuItem>

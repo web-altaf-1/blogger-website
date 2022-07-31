@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import PreLoader from '../PreLoader/PreLoader';
+import Loading from '../Loading/Loading';
 
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -13,9 +15,9 @@ const SocialLogin = () => {
     let errorElement;
     let user1 = null ;
 
-    // if(loading || loading1){
-    //     return <Loading></Loading>
-    // }
+    if(loading ){
+        return <Loading/>
+    }
 
     // if (error || error1) {
     //     errorElement = <p className='text-danger'>Error: {error?.message} {error1?.message}</p>

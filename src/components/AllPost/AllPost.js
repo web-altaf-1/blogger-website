@@ -8,6 +8,9 @@ import './AllPost.css';
 
 import Pagination from '@mui/material/Pagination';
 import { TrendingUp } from '@mui/icons-material';
+import { toast } from 'react-toastify';
+import { async } from '@firebase/util';
+import PreLoader from '../PreLoader/PreLoader';
 // or
 
 const AllPost = () => {
@@ -19,7 +22,7 @@ const AllPost = () => {
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        fetch('http://localhost:5000/post-count')
+        fetch('https://sheltered-temple-11409.herokuapp.com/post-count')
             .then(res => res.json())
             .then(data => {
                 const count = data.count;
@@ -30,34 +33,42 @@ const AllPost = () => {
 
     }, []);
 
+    
     var size = 8;
 
     useEffect(() => {
-        setIsLoading(true)
-        fetch(`http://localhost:5000/posts?page=${page}&size=${size}`)
+        setIsLoading(true);
+
+        fetch(`https://sheltered-temple-11409.herokuapp.com/posts?page=${page}&size=${size}`)
             .then(res => res.json())
-            .then(data => setAllPost(data))
+            .then(data => setAllPost(data));
+
+
         setIsLoading(false)
-    }, [page,size])
+
+
+    }, [page, size])
 
 
     if (isLoading) {
         return <Loading></Loading>
     }
 
-
     return (
-        <div>
-            <h2 className='text-center my-3'>Recently</h2>
+        <div id='recent-post'>
+            <h2  className='text-center my-3'>Recently</h2>
             <div className='d-flex ' style={{ justifyContent: "space-evenly" }}>
-                <div className='' style={{ width: '70%' }}>
+                <div className=''  style={{ width: '70%' }}>
                     {
                         allPost.map(post => <HomeSingleCard key={post._id} post={post}></HomeSingleCard>)
                     }
                     <>
                         {
                             <Pagination size="lg" className="d-flex justify-content-center mb-5" count={pageCount}
-                                onChange={(event, value) => setPage(value)}
+                                onChange={(event, value) => {
+                                    setPage(value);
+                                    
+                                } }
                                 color="primary" />
 
                         }
@@ -89,6 +100,9 @@ const AllPost = () => {
 
 
     )
+
+
+
 };
 
 

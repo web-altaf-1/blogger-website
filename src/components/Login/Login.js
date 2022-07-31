@@ -19,6 +19,7 @@ import auth from '../../firebase.init';
 import Loading from '../Loading/Loading';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PreLoader from '../PreLoader/PreLoader';
 
 function Copyright(props) {
   return (
@@ -46,7 +47,7 @@ export default function SignIn() {
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
-  const [loading2] = useSignInWithGoogle(auth);
+  
 
   const [isTrue, setIsTrue] = React.useState(false);
 
@@ -58,11 +59,27 @@ export default function SignIn() {
 
     const email = event.target.email.value;
     const password = event.target.password.value;
+    console.log({ email, password });
+
+    
+    if (email == '') {
+      toast('Email must be needed to login')
+
+    }
+    if (email !== '') {
+      signInWithEmailAndPassword(email, password);
+
+    }
+    
+    if (password !== '') {
+      signInWithEmailAndPassword(email, password);
+
+    }
+    else {
+      toast('You must be fill up login form by Email and password')
+    }
 
 
-    signInWithEmailAndPassword(email, password);
-
-    toast('User Login successfull')
 
   };
 
@@ -71,17 +88,19 @@ export default function SignIn() {
 
 
   if (user) {
+    toast('User Login successfull');
+
     navigate('/');
 
   }
 
 
   if (loading) {
-    return <Loading></Loading>
+    return <PreLoader />
   }
 
   if (error) {
-    toast(error.message);  
+    toast(error.message);
   }
 
   return (
