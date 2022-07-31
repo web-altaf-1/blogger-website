@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import auth from '../../firebase.init';
@@ -61,7 +61,7 @@ export default function SignIn() {
     const password = event.target.password.value;
     console.log({ email, password });
 
-    
+
     if (email == '') {
       toast('Email must be needed to login')
 
@@ -70,7 +70,7 @@ export default function SignIn() {
       signInWithEmailAndPassword(email, password);
 
     }
-    
+
     if (password !== '') {
       signInWithEmailAndPassword(email, password);
 
@@ -83,6 +83,10 @@ export default function SignIn() {
 
   };
 
+  const handleResetPassword = (event) => {
+    event.preventDefault();
+    navigate('/forget-password')
+  }
 
 
 
@@ -175,7 +179,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link onClick={handleResetPassword} href="" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

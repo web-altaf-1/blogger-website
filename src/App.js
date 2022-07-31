@@ -19,6 +19,7 @@ import UserProfile from './components/UserProfile/UserProfile';
 
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
+import ForgetPassword from './components/ForgetPassword/ForgetPassword';
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/forget-password' element={<ForgetPassword/>}></Route>
         <Route path='/user-profile' element={
           <RequireAuth>
             <UserProfile></UserProfile>
