@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import Loading from '../Loading/Loading';
+import { useEffect, useState } from 'react';
 
 const usePost = () => {
 
-    
+
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    
 
 
-    useEffect(()=>{
+
+    useEffect(() => {
+        const url = 'https://sheltered-temple-11409.herokuapp.com/posts';
+
         setIsLoading(true);
-        fetch('https://sheltered-temple-11409.herokuapp.com/posts')
-        .then(res => res.json())
-        
-        .then(data => {
-            
-            setPosts(data);
-        })
+        fetch(url)
+            .then(res => res.json())
 
-        
-        setIsLoading(false);
-    },[])
+            .then(data => {
 
-    
+                setPosts(data)
+                setIsLoading(false);
+            })
 
 
-    return [posts,setPosts ,isLoading]
+
+    }, [])
+
+
+
+
+    return [posts, setPosts, isLoading]
 };
 
 export default usePost;

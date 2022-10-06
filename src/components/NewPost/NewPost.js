@@ -25,7 +25,7 @@ const NewPost = () => {
         const img = event.target.photo.value;
         const time = new Date(Date.now());
 
-        const newData = { email: user?.email, photo: user?.photoURL, name: user?.displayName ? user?.displayName : 'Anonymous', title: title, img:img, content: content, time: time }
+        const newData = { email: user?.email, photo: user?.photoURL, name: user?.displayName ? user?.displayName : 'Anonymous', title: title, img: img, content: content, time: time }
 
         event.target.reset();
         toast('Post Created Successfully')

@@ -8,3 +8,38 @@
     }
 }
 
+.slider-bg{
+    background-image: url(../../images/slide_bg.png);
+    min-height: 80vh;
+    font-family: 'bangla-custom-font';
+}
+
+.left-banner-div{
+    width: 45%;
+}
+.right-banner-div{
+    width: 45%;
+}
+
+.banner-left-text{
+    color: white;
+}
+.banner-desc{
+    color: #ccc;
+    font-size: 16px;
+    line-height: 22px;
+    margin: 15px 0;
+}
+.banner-button{
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 17px;
+    padding: 10px;
+}
+.single-slider{
+    padding: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

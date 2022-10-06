@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import usePost from '../hooks/usePost';
 import './AdminPanel.css';
@@ -8,11 +9,32 @@ const AdminPanel = () => {
 
     const [posts, setPosts, isLoading] = usePost();
     const [user] = useAuthState(auth);
+
+    // delete a post 
+    
+    const removePost = (id) => {
+        const procced = window.confirm('Do you want to remove this post ??');
+        if (procced) {
+            console.log('deleting user id', id);
+            const url = `http://localhost:5000/delete-post/${id}`;
+
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        const remaining = posts.filter(post => post._id !== id);
+                        toast('Post deleted successfully !! ')
+                        setPosts(remaining);
+                    }
+                })
+        }
+    }
+
     return (
         <div>
-            <div>
-                <h4 className='text-center mt-2'>Admin Email : {user?.email}</h4>
-            </div>
+            <h3 className='text-primary text-center mt-1'>Manage All Post </h3>
             <div className="table my-3 container">
                 <Table responsive>
                     <thead>
@@ -25,6 +47,7 @@ const AdminPanel = () => {
                             <th>Post Title</th>
                             <th>Time</th>
                             <th>Delete</th>
+                            <th>Update</th>
                         </tr>
                     </thead>
 
@@ -44,8 +67,8 @@ const AdminPanel = () => {
                                 <td>{post.time?.slice(0, 10)}</td>
                                 <td>
                                     <button
-                                    // onClick={() => removeItem(car._id)}
-                                    // className="remove"
+                                        onClick={() => removePost(post._id)}
+                                        className="remove"
                                     >
                                         X
                                     </button>

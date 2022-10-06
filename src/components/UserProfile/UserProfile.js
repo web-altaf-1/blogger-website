@@ -1,10 +1,14 @@
 import React from 'react';
 import './UserProfile.css';
 import auth from '../../firebase.init';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState, useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 
 const UserProfile = () => {
     const [user] = useAuthState(auth);
+
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+    
 
     return (
         <div className="container">
@@ -15,12 +19,12 @@ const UserProfile = () => {
                         <div className="card5">
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src={ user?.photoURL ? user.photoURL : 'https://bootdey.com/img/Content/avatar/avatar7.png'} alt="Admin" className="rounded-circle" width="150" />
+                                    <img src={user?.photoURL ? user.photoURL : 'https://bootdey.com/img/Content/avatar/avatar7.png'} alt="Admin" className="rounded-circle" width="150" />
                                     <div className="mt-3">
                                         <h4>{user?.displayName ? user.displayName : 'Unknown User'}</h4>
                                         <p className="text-secondary mb-1">Full Stack Developer</p>
                                         <p className="text-muted font-size-sm">Barisal , Dhaka , Bangladesh</p>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +62,7 @@ const UserProfile = () => {
                                         <h6 className="mb-0">Full Name</h6>
                                     </div>
                                     <div className="col-sm-9 text-secondary">
-                                    {user?.displayName ? user?.displayName : 'Unknown User'}
+                                        {user?.displayName ? user?.displayName : 'Unknown User'}
                                     </div>
                                 </div>
                                 <hr />
@@ -67,7 +71,7 @@ const UserProfile = () => {
                                         <h6 className="mb-0">Email</h6>
                                     </div>
                                     <div className="col-sm-9 text-secondary">
-                                        {user?.email }
+                                        {user?.email}
                                     </div>
                                 </div>
                                 <hr />
@@ -85,7 +89,7 @@ const UserProfile = () => {
                                         <h6 className="mb-0">Mobile</h6>
                                     </div>
                                     <div className="col-sm-9 text-secondary">
-                                    (+880) 18*****59
+                                        (+880) 18*****59
                                     </div>
                                 </div>
                                 <hr />
@@ -100,41 +104,20 @@ const UserProfile = () => {
                                 <hr />
                                 <div className="row">
                                     <div className="col-sm-12">
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="row gutters-sm">
-                            <div className="col-sm-6 mb-3">
-                                <div className="card h-100">
-                                    <div className="card-body">
-                                        <h6 className="d-flex align-items-center mb-3"><i className="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                        <small>Web Design</small>
-                                        <div className="progress mb-3" style={{height: '5px'}}>
-                                            <div className="progress-bar bg-primary" role="progressbar" style={{width: '80%'}} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>Website Markup</small>
-                                        <div className="progress mb-3" style={{height: '5px'}}>
-                                            <div className="progress-bar bg-primary" role="progressbar" style={{width: '72%'}} aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>One Page</small>
-                                        <div className="progress mb-3" style={{height: '5px'}}>
-                                            <div className="progress-bar bg-primary" role="progressbar" style={{width: '89%'}} aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>Mobile Template</small>
-                                        <div className="progress mb-3" style={{height: '5px'}}>
-                                            <div className="progress-bar bg-primary" role="progressbar" style={{width: '55%'}} aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>Backend API</small>
-                                        <div className="progress mb-3" style={{height: '5px'}}>
-                                            <div className="progress-bar bg-primary" role="progressbar" style={{width: '66%'}} aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
+                        <div className='shadow p-3'>
+                            <h4>Forget Password or Update Password ?? </h4>
+                            <button onClick={()=> {
+                                sendPasswordResetEmail(user?.email);
+                                toast('Password Reset Link Send . Please check your Email')
+                            } } className='btn btn-outline-secondary'>Forget Password</button>
+                            <button className='btn btn-outline-secondary ms-2'>Update Password</button>
+
                         </div>
 
 

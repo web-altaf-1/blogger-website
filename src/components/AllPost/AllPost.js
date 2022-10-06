@@ -2,38 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import HomeSingleCard from '../HomeSingleCard/HomeSingleCard';
-import usePost from '../hooks/usePost';
-import Loading from '../Loading/Loading';
 import './AllPost.css';
 
 import Pagination from '@mui/material/Pagination';
-import { TrendingUp } from '@mui/icons-material';
-import { toast } from 'react-toastify';
-import { async } from '@firebase/util';
-import PreLoader from '../PreLoader/PreLoader';
+import Loading from '../Loading/Loading';
 // or
 
 const AllPost = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [allPost, setAllPost] = useState([]);
-    // const [posts, setPosts, isLoading] = usePost();
     const [user] = useAuthState(auth);
     const [pageCount, setPageCount] = useState(0);
     const [page, setPage] = useState(1);
 
     useEffect(() => {
+
+
         fetch('https://sheltered-temple-11409.herokuapp.com/post-count')
             .then(res => res.json())
             .then(data => {
                 const count = data.count;
                 const pages = Math.ceil(count / 8);
-                setPageCount(pages)
+                setPageCount(pages);
             });
 
 
     }, []);
 
-    
+
     var size = 8;
 
     useEffect(() => {
@@ -41,10 +37,14 @@ const AllPost = () => {
 
         fetch(`https://sheltered-temple-11409.herokuapp.com/posts?page=${page}&size=${size}`)
             .then(res => res.json())
-            .then(data => setAllPost(data));
+            .then(data => {
+                setAllPost(data);
+                setIsLoading(false);
+
+            });
 
 
-        setIsLoading(false)
+
 
 
     }, [page, size])
@@ -56,9 +56,9 @@ const AllPost = () => {
 
     return (
         <div id='recent-post'>
-            <h2  className='text-center my-3'>Recently</h2>
+            <h2 className='text-center my-3'>Recently</h2>
             <div className='d-flex ' style={{ justifyContent: "space-evenly" }}>
-                <div className=''  style={{ width: '70%' }}>
+                <div className='all-post-container' style={{ width: '70%' }}>
                     {
                         allPost.map(post => <HomeSingleCard key={post._id} post={post}></HomeSingleCard>)
                     }
@@ -67,8 +67,10 @@ const AllPost = () => {
                             <Pagination size="lg" className="d-flex justify-content-center mb-5" count={pageCount}
                                 onChange={(event, value) => {
                                     setPage(value);
-                                    
-                                } }
+                                    document.querySelector('.all-post-container').scrollIntoView({
+                                        behavior: 'smooth'
+                                    });
+                                }}
                                 color="primary" />
 
                         }

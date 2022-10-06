@@ -6,7 +6,7 @@ import Register from './components/Register/Register';
 import Navbar from './components/Navbar/Navbar';
 import NewPost from './components/NewPost/NewPost';
 import AdminPanel from './components/AdminPanel/AdminPanel';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RequireAdmin from './components/RequireAdmin/RequireAdmin';
 import PostDetails from './components/PostDetails/PostDetails';
@@ -16,31 +16,33 @@ import auth from './firebase.init';
 import PreLoader from './components/PreLoader/PreLoader';
 import UserProfile from './components/UserProfile/UserProfile';
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import ChatBot from 'react-simple-chatbot';
-import { ThemeProvider } from 'styled-components';
 import ForgetPassword from './components/ForgetPassword/ForgetPassword';
 
 function App() {
   const [user, loading] = useAuthState(auth);
 
-
   if (loading) {
     return <PreLoader ></PreLoader>
   }
+  
+
   return (
     <div className="">
       <Navbar></Navbar>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
-        <Route path='/forget-password' element={<ForgetPassword/>}></Route>
+        <Route path='/forget-password' element={<ForgetPassword />}></Route>
+
         <Route path='/user-profile' element={
           <RequireAuth>
             <UserProfile></UserProfile>
           </RequireAuth>
         }></Route>
-        <Route path='/post/:id' element={<PostDetails></PostDetails>}></Route>
+        <Route path='/posts/:id' element={<PostDetails></PostDetails>}></Route>
         <Route path='/new-post' element={
           <RequireAuth>
             <NewPost></NewPost>

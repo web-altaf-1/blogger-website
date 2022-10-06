@@ -2,7 +2,6 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
-import PreLoader from '../PreLoader/PreLoader';
 import Loading from '../Loading/Loading';
 
 const SocialLogin = () => {
@@ -19,9 +18,9 @@ const SocialLogin = () => {
         return <Loading/>
     }
 
-    // if (error || error1) {
-    //     errorElement = <p className='text-danger'>Error: {error?.message} {error1?.message}</p>
-    // }
+    if (error) {
+        errorElement = <p className='text-danger'>Error: {error?.message}</p>
+    }
 
     if (user || user1) {
         navigate(from, { replace: true });

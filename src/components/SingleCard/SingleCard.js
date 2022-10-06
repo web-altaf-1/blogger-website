@@ -1,11 +1,8 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
 import './SingleCard.css';
 
 const SingleCard = (props) => {
-    const [user] = useAuthState(auth);
     const {title, content,img ,name} = props.post;
     return (
         <Card className='single-card' style={{ width: '18rem' }}>

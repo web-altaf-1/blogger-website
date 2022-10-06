@@ -9,7 +9,8 @@ const HomeSingleCard = (props) => {
     const navigate = useNavigate();
 
     const openSingleItem = (id) => {
-        navigate(`post/${id}`);
+        navigate(`posts/${id}`);
+        
 
     }
 

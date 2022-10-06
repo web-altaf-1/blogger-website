@@ -1,9 +1,15 @@
+@font-face {
+  font-family: 'bangla-custom-font';
+  src: url('assets/fonts/font.ttf');
+}
+
 .App {
   text-align: center;
 }
 
-.body{
+.body {
   scroll-behavior: smooth;
+  font-family: 'bangla-custom-font';
 }
 
 .App-logo {
@@ -36,6 +42,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
