@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import usePost from '../hooks/usePost';
+import PreLoader from '../PreLoader/PreLoader';
 import './AdminPanel.css';
+
 const AdminPanel = () => {
 
     const [posts, setPosts, isLoading] = usePost();
     const [user] = useAuthState(auth);
 
     // delete a post 
-    
+
     const removePost = (id) => {
         const procced = window.confirm('Do you want to remove this post ??');
         if (procced) {
             console.log('deleting user id', id);
-            const url = `http://localhost:5000/delete-post/${id}`;
+            const url = `https://sheltered-temple-11409.herokuapp.com/delete-post/${id}`;
 
             fetch(url, {
                 method: 'DELETE'
@@ -32,10 +34,14 @@ const AdminPanel = () => {
         }
     }
 
+    if (isLoading) {
+        return <PreLoader></PreLoader>
+    }
+
     return (
-        <div>
-            <h3 className='text-primary text-center mt-1'>Manage All Post </h3>
-            <div className="table my-3 container">
+        <div className='admin-panel-container'>
+            <h3 className='admin-panel-title'>Manage All Post : {posts.length} </h3>
+            <div className="table my-3 container admin-panel-content shadow-lg">
                 <Table responsive>
                     <thead>
                         <tr>
@@ -68,17 +74,18 @@ const AdminPanel = () => {
                                 <td>
                                     <button
                                         onClick={() => removePost(post._id)}
-                                        className="remove"
+                                        className="admin-remove-post-button"
                                     >
                                         X
                                     </button>
 
                                 </td>
                                 <td>
-                                    <button
+                                    <button className='admin-post-update-button'
                                     // onClick={() => handleItemUpdate(car._id)}
                                     >Update</button>
                                 </td>
+                                
                             </tr>
                         ))}
                     </tbody>

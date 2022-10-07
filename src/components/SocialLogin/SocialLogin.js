@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Loading/Loading';
+// import { GoogleLogin } from 'react-google-login';
+import './SocialLogin.css';
 
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -10,12 +12,12 @@ const SocialLogin = () => {
     const location = useLocation();
 
     let from = location.state?.from?.pathname || "/";
-    
-    let errorElement;
-    let user1 = null ;
 
-    if(loading ){
-        return <Loading/>
+    let errorElement;
+    let user1 = null;
+
+    if (loading) {
+        return <Loading />
     }
 
     if (error) {
@@ -35,12 +37,15 @@ const SocialLogin = () => {
             </div>
             {errorElement}
             <div className=''>
-                <button
-                    onClick={() => signInWithGoogle()}
-                    className='btn btn-info w-50 d-block mx-auto my-2'>
-                    <span className='px-2'>Google Sign In</span>
-                </button>
-                
+
+                <div onClick={() => signInWithGoogle()}
+                    className='google-btn m-auto'>
+                    <div className="google-icon-wrapper">
+                        <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+                    </div>
+                    <p className="btn-text"><b>Sign in with google</b></p>
+                </div>
+
             </div>
         </div>
     );

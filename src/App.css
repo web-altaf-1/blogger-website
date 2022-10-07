@@ -2,6 +2,10 @@
   font-family: 'bangla-custom-font';
   src: url('assets/fonts/font.ttf');
 }
+*{
+  
+  box-sizing: border-box;
+}
 
 .App {
   text-align: center;

@@ -2,10 +2,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import NavMenu from '../NavMenu/NavMenu';
+import './Navbar.css';
 
 function CollapsibleExample() {
   const [user] = useAuthState(auth);
@@ -20,28 +21,43 @@ function CollapsibleExample() {
         <Navbar.Brand as={Link} to="/">BlogBd</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="ms-auto">
 
-            {
-              user ? <Nav.Link as={Link} to="/new-post">Create a Post</Nav.Link> : <Nav.Link onClick={notUser} as={Link} to="/new-post">Create a Post </Nav.Link>
-
-            }
-            {
-              user?.email === 'web.altaf.1@gmail.com' ? <Nav.Link as={Link} to="/admin-panel">Admin Panel</Nav.Link> : <></>
-            }
-            {
-              user?.email === 'admin@altaf.com' ? <Nav.Link as={Link} to="/admin-panel">Admin Panel</Nav.Link> : <></>
-            }
-            
-            {
-              user?.email === 'admin@samia.com' ? <Nav.Link as={Link} to="/admin-panel">Admin Panel</Nav.Link> : <></>
-            }
 
           </Nav>
           <Nav>
+            <Nav.Link as={Link} to='/'>প্রথম পাতা</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link as={Link} to='/'>ফ্রি নেট</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link as={Link} to='/'>প্রোগ্রামিং</Nav.Link>
+          </Nav>
+          {
+            user && <Nav>
+              <div className="dropdown">
+                <button className="navbar-dashboard-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ড্যাশবোর্ড
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <NavLink to='/new-post' className="dropdown-item" >New Post</NavLink>
+                  <NavLink to='/admin-panel' className="dropdown-item" >Admin Panel</NavLink>
+
+
+                </div>
+              </div>
+
+            </Nav>
+          }
+
+          <Nav>
             {
-              !user ? <Nav.Link as={Link} to="/login">Login</Nav.Link> : <></>
+              !user ? <Nav.Link as={Link} to="/login">লগিন</Nav.Link> : <></>
             }
+          </Nav>
+          <Nav>
+
           </Nav>
           <Nav>
             {user ? <NavMenu></NavMenu> : <></>}

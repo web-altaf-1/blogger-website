@@ -1,12 +1,13 @@
 /* Demo Code: */
 body {
-    font-family: 'Open Sans', arial, sans-serif;
+    font-family: 'bangla-custom-font';
     color: #333;
     font-size: 14px;
 }
 
 .projcard-container {
     margin: 50px 0;
+    
 }
 
 /* Actual Code: */
@@ -133,7 +134,7 @@ body {
 }
 
 .projcard-title {
-    font-family: 'Voces', 'Open Sans', arial, sans-serif;
+    font-family: 'bangla-custom-font';
     font-size: 24px;
 }
 

@@ -1,0 +1,42 @@
+.admin-panel-content {
+    /* border: 2px dashed rgb(64, 64, 255); */
+    padding: 15px;
+    /* box-shadow: 10px 10px 32px #ddd; */
+}
+
+.admin-panel-title {
+    color: rgb(0, 86, 216);
+    text-align: center;
+    margin: 10px;
+    font-weight: 500;
+}
+
+.admin-remove-post-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(255, 96, 47);
+    color: white;
+}
+
+.admin-remove-post-button:hover {
+    background-color: rgb(139, 0, 0);
+    transition: 0.5s;
+}
+
+.admin-post-update-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(5, 170, 41);
+    color: white;
+}
+
+.admin-post-update-button:hover {
+    background-color: rgb(4, 95, 4);
+    transition: 0.5s;
+}
+
+
+
+

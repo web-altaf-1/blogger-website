@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './SingleCard.css';
+import notFoundImg from '../../images/img-not-found.png'
 
 const SingleCard = (props) => {
     const {title, content,img ,name} = props.post;
     return (
         <Card className='single-card' style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={img} />
+            <Card.Img width='245px' height='235px' variant="top" src={img || notFoundImg} />
             <Card.Body>
                 <Card.Title>{title? title : 'No Title'}</Card.Title>
                 <Card.Text>

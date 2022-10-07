@@ -43,3 +43,14 @@
     justify-content: space-around;
     align-items: center;
 }
+
+@media screen and (max-width:682px) {
+
+    .left-banner-div{
+        width: 100%;
+    }
+
+    .right-banner-div{
+        
+    }    
+}

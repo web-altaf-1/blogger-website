@@ -1,0 +1,27 @@
+.navbar-dark {
+    --bs-navbar-color: rgb(255 255 255) !important;
+}
+
+#responsive-navbar-nav a {
+    font-size: 16px;
+}
+
+.navbar-dashboard-button {
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+    background-color: #c945ff;
+    color: white;
+    padding: 3px 13px;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    color: black;
+    text-decoration: none;
+    background-color: white !important;
+}
+.dropdown-item:hover{
+    background-color: #c945ff !important;
+    color: white;
+}
